@@ -16,7 +16,7 @@ const Gauge = styled.div`
   display: inline-block;
   height: inherit;
   position: relative;
-  background-color: skyblue;
+  background-color: #7e899b;
   width: ${(props) => props.percent}%;
   top: -2px;
 `;
