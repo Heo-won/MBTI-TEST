@@ -4,6 +4,7 @@ import GlobalStyle from './components/GlobalStyle';
 import Start from './components/Start';
 import { useSelector } from 'react-redux';
 import Mbti from './components/Mbti';
+import Show from './components/Show';
 
 const Main = styled.main`
   text-align: center;

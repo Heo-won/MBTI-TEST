@@ -1,4 +1,8 @@
+import { useSelector, useDispatch } from 'react-redux';
 import styled from 'styled-components';
+import OrangeButton from './OrangeButton';
+import { reset } from '../store/modules/mbti';
+import { useEffect } from 'react';
 
 const Header = styled.p`
   font-size: 3em;
@@ -9,11 +13,11 @@ const Explaination = styled.p`
 `;
 const Result = styled.p`
   font-size: 3em;
-  color: dodgerblue;
+  color: #eef1f6;
 `;
 const Additional = styled.p`
   font-size: 2em;
-  color: orange;
+  color: #606981;
 `;
 const AdditionalImg = styled.img`
   width: 500px;
@@ -23,7 +27,23 @@ const AdditionalImg = styled.img`
 export default function Show() {
   const result = useSelector((state) => state.mbti.mbtiResult);
   const explaination = useSelector((state) => state.mbti.explaination[result]);
+  console.log(result);
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    async function sendData() {
+      const resInc = await fetch('http://localhost:3002/data/inccount', {
+        method: 'POST',
+      });
+      if (resInc.status === 200) {
+        console.log(await resInc.json());
+      } else {
+        throw new Error('통신 이상');
+      }
+    }
+    sendData();
+  }, []);
+
   return (
     <>
       <Header>당신의 개발자 MBTI 결과는?</Header>
@@ -31,7 +51,7 @@ export default function Show() {
       <Result>{result}</Result>
       <Additional>이건 재미로 읽어 보세요!</Additional>
       <AdditionalImg src={explaination.img} alt="팩폭" />
-      <PinkButton text="다시 검사하기" clickEvent={() => dispatch(reset())} />
+      <OrangeButton text="다시 검사하기" clickEvent={() => dispatch(reset())} />
     </>
   );
 }

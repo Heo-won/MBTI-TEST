@@ -145,9 +145,7 @@ export function check(result) {
   //전달할게 있으면
   return {
     type: CHECK,
-    payload: {
-      result: { result },
-    },
+    payload: { result },
   };
 }
 
